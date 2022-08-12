@@ -5,6 +5,7 @@ RSpec.describe Menu do
         it "Checks only starter dishes are returned" do
             testmenu = Menu.new
             fakedish = Dish.new("fakedish", "7.50", "starter")
+
             testmenu.add_dish("fakedish", "7.50", "starter")
             testmenu.add_dish("fakedish2","5", "main")
             
@@ -14,6 +15,7 @@ RSpec.describe Menu do
             testmenu = Menu.new
             fakedish = Dish.new("fakedish", "7.50", "starter")
             fakedish2 = Dish.new("fakedish2","5", "main")
+
             testmenu.add_dish("fakedish", "7.50", "starter")
             testmenu.add_dish("fakedish2","5", "main")
             
@@ -26,14 +28,26 @@ RSpec.describe Menu do
             testmenu.add_dish("fakedish", "7.50", "starter")
             testmenu.add_dish("fakedish2", "5", "main")
             
-            expect(testmenu.print_dishes_with_prices("starter")).to eq ["fakedish: £7.50\n"]
+            expect(testmenu.string_dishes_with_prices("starter")).to eq ["fakedish: £7.50\n"]
         end
         it "Checks a list of formatted strings of starters is returned - multiple" do
             testmenu = Menu.new
             testmenu.add_dish("fakedish", "7.50", "starter")
             testmenu.add_dish("fakedish2", "5", "starter")
             
-            expect(testmenu.print_dishes_with_prices("starter")).to eq ["fakedish: £7.50\n", "fakedish2: £5\n"]
+            expect(testmenu.string_dishes_with_prices("starter")).to eq ["fakedish: £7.50\n", "fakedish2: £5\n"]
+        end
+    end
+    describe "#dish(choice) method" do
+        it "Checks the Dish object for the particular dish is returned" do
+            testmenu = Menu.new
+            fakedish = Dish.new("fakedish", "7.50", "starter")
+            fakedish2 = Dish.new("fakedish2","5", "main")
+
+            testmenu.add_dish("fakedish", "7.50", "starter")
+            testmenu.add_dish("fakedish2","5", "main")
+
+            expect(testmenu.dish("fakedish")).to eq fakedish
         end
     end
 end

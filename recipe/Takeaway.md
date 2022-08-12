@@ -44,7 +44,7 @@ class Menu
     @menu = []
   end
 
-  def add_dish(name, price, category)
+  def add_dish(name, price, category) #all inputs are strings
     @menu << Dish.new(name, price, category)
   end
 
@@ -52,21 +52,14 @@ class Menu
     #returns the dish object matching the specified name
   end
 
-  def starters
-    return @menu.select {|dish| dish[category] = 'starter'}
+  def dishes_of_category(category)#category should default "all dishes" or be starter/main/dessert
+  #returns an array of Dish objects for a particular category, or if no argument, will return all dishes
   end
 
-  def starters_list
-    #returns a list of the names of starter dishes
+  def string_dishes_with_prices(category)
+  #returns a string of "#{dish.name}: £#{dish.price}\n" for each dish in the category
   end
 
-  def mains
-     #returns main dishes
-  end
-
-  def desserts
-    #returns dessert dishes
-  end
 end
 
 ####
@@ -88,7 +81,8 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber)
 
 
   private
-#COULD MAKE MENU LAYOUT SEPARATE CLASS?
+
+class MenuReader
   def print_header
     #returns header of menu
   end
