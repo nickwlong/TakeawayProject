@@ -17,11 +17,13 @@ class Menu
 
   def dishes_of_category(category="all dishes")
     return @menu if category == "all dishes"
-    return @menu.select{|dish| dish.category == 'starter'}
+    return @menu.select{|dish| dish.category == category}
   end
 
   def string_dishes_with_prices(category)
-    return dishes_of_category(category).map{|dish| "#{dish.name}: £#{dish.price}\n"}
+
+      return dishes_of_category(category).map{|dish| "#{dish.name}: £#{dish.price}\n"}
+
   end
 
 end

@@ -1,39 +1,41 @@
-local_dir = File.expand_path('../', __FILE__)
-$LOAD_PATH.unshift(local_dir)
-
-require 'Menu'
+require_relative './Menu'
 
 class MenuReader
-    def initialize(menu)
+    def initialize(menu, io = Kernel)
         @menu = menu
+        @io = io
     end
 
-
     def print_header
-        puts "------------------------------------------------".center(40)
-        puts "Welcome to Hotel Nicholas\n".center(40)
+        @io.puts "------------------------------------------------".center(40)
+        @io.puts "Welcome to Hotel Nicholas\n".center(40)
     end
 
     def print_starters
-        puts "\nOur starters are:        "
-        puts @menu.string_dishes_with_prices('starter')
-
+        if not @menu.dishes_of_category('starter').empty?
+            @io.puts "\nOur starters are:        "
+            @io.puts @menu.string_dishes_with_prices('starter')
+        end
     end
 
     def print_mains
-        puts "\nOur main dishes are:        "
-        puts @menu.string_dishes_with_prices('main')
+        if not @menu.dishes_of_category('main').empty?
+            @io.puts "\nOur main dishes are:        "
+            @io.puts @menu.string_dishes_with_prices('main')
+        end
     end
 
     def print_desserts
-        puts "\nOur dessert dishes are:        "
-        puts @menu.string_dishes_with_prices('dessert')
+        if not @menu.dishes_of_category('dessert').empty?
+            @io.puts "\nOur dessert dishes are:        "
+            @io.puts @menu.string_dishes_with_prices('dessert')
+        end
     end
 
     def print_footer
-        puts "\n\n"
-        puts "Thank you for visiting".center(40)
-        puts "------------------------------------------------"
+        @io.puts "\n\n"
+        @io.puts "To place an order, please type the item \nname exactly as found in the menu. \nThank you for visiting".center(40)
+        @io.puts "------------------------------------------------"
     end
 
     def print_menu
@@ -61,4 +63,4 @@ hotelNicholas.add_dish("Apricot Sorbet", "6.00", "dessert")
 hotelNicholas.add_dish("Honey, Whisky and Almond Sponge", "8.00", "dessert")
 hotelNicholas.add_dish("Chocolate Arctic Roll", "7.00", "dessert")
 hotelNick = MenuReader.new(hotelNicholas)
-hotelNick.print_menu
+
