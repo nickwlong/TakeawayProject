@@ -13,7 +13,9 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
     @contactaddress = @io.gets.chomp
     "Please enter your contact number"
     @contactphonenumber = @io.gets.chomp
+    
   end
 end
 
-Nick = Customer.new
+nick = Customer.new
+nick.run

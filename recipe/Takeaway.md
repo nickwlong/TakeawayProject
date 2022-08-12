@@ -68,6 +68,16 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber)
     @basket = []
   end
 
+  def run
+    @io.puts "Welcome to the takeaway service for Hotel Nicholas, please enter your name:"
+    @contactname = @io.gets.chomp
+    "Please enter your address"
+    @contactaddress = @io.gets.chomp
+    "Please enter your contact number"
+    @contactphonenumber = @io.gets.chomp
+  end
+  
+
   def print_all_menu(category) #category is either starter, main, dessert, or all
     #puts to terminal the entire menu
   end

@@ -14,4 +14,5 @@ RSpec.describe MenuReader do
         io = double(:io)
         expect(io).to receive(:puts).with("\nOur starters are:        ").ordered
         expect(io).to receive(:puts).with("Onion Soup: £6.50").ordered
+    end
 end

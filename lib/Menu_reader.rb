@@ -64,3 +64,4 @@ hotelNicholas.add_dish("Honey, Whisky and Almond Sponge", "8.00", "dessert")
 hotelNicholas.add_dish("Chocolate Arctic Roll", "7.00", "dessert")
 hotelNick = MenuReader.new(hotelNicholas)
 
+p hotelNick.print_menu
