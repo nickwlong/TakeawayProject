@@ -35,7 +35,7 @@ class MenuReader
     def print_footer
         @io.puts "\n\n"
         @io.puts "To place an order, please type the item \nname exactly as found in the menu. \nThank you for visiting".center(40)
-        @io.puts "------------------------------------------------"
+        @io.puts "------------------------------------------------\n\n"
     end
 
     def print_menu

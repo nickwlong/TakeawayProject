@@ -10,7 +10,7 @@ RSpec.describe MenuReader do
         testReader = MenuReader.new(menudouble, io)
         testReader.print_starters
     end
-    it "Skips printing of a category if the category has no dishes"
+    xit "Skips printing of a category if the category has no dishes" do
         io = double(:io)
         expect(io).to receive(:puts).with("\nOur starters are:        ").ordered
         expect(io).to receive(:puts).with("Onion Soup: £6.50").ordered

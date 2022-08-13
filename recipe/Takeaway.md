@@ -90,7 +90,6 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber)
     #puts a receipt of the total cost of items in the basket so far
 
 
-  private
 
 class MenuReader
   def print_header
@@ -112,7 +111,33 @@ class MenuReader
   def print_footer
     #returns footer of menu
   end
+end
 
+
+class Receipt
+  def initialize(customer)
+    @customer_basket = customer.basket
+  end
+
+  def print_receipt
+    #makes a laid out receipt for the customer
+  end
+
+  def total_cost
+    #Adds cost of all items in customer basket
+    #Returns cost as string
+  end
+
+  def receipt_header
+  end
+
+  def receipt_footer
+  end
+end
+
+class Customer_communication
+  #Uses twilio to send text to customer to confirm delivery time
+end
 
 
   
@@ -136,7 +161,8 @@ hotelNicholas.add_dish("Apricot Sorbet", 6.00, "dessert")
 hotelNicholas.add_dish("Honey, Whisky and Almond Sponge", 8.00, "dessert")
 hotelNicholas.add_dish("Chocolate Arctic Roll", 7.00, "dessert")
 hotelNicholas.starter # => returns dish objects with starter categories
-
+hotelNickmenu = MenuReader.new(hotelNicholas)
+hotelNickmenu.print_starters # => "Our starters are:/nOnion Soup: £6.50/nCarrot Soup: £6.50/nBrixham Crab: £11.50/nHand Dived Devon Scallop: £10.25"
 
 
 ```
