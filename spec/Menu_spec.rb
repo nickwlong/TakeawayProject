@@ -4,7 +4,7 @@ RSpec.describe Menu do
     describe "#add and #dishes_of_category method" do
         it "Checks only starter dishes are returned" do
             testmenu = Menu.new
-            fakedish = Dish.new("fakedish", "7.50", "starter")
+            fakedish = Dish.new("fakedish", "7.50", "starter", 0)
 
             testmenu.add_dish("fakedish", "7.50", "starter")
             testmenu.add_dish("fakedish2","5", "main")
@@ -13,8 +13,8 @@ RSpec.describe Menu do
         end
         it "Checks all dishes are returned" do
             testmenu = Menu.new
-            fakedish = Dish.new("fakedish", "7.50", "starter")
-            fakedish2 = Dish.new("fakedish2","5", "main")
+            fakedish = Dish.new("fakedish", "7.50", "starter", 0)
+            fakedish2 = Dish.new("fakedish2","5", "main", 0)
 
             testmenu.add_dish("fakedish", "7.50", "starter")
             testmenu.add_dish("fakedish2","5", "main")
@@ -41,8 +41,8 @@ RSpec.describe Menu do
     describe "#dish(choice) method" do
         it "Checks the Dish object for the particular dish is returned" do
             testmenu = Menu.new
-            fakedish = Dish.new("fakedish", "7.50", "starter")
-            fakedish2 = Dish.new("fakedish2","5", "main")
+            fakedish = Dish.new("fakedish", "7.50", "starter", 0)
+            fakedish2 = Dish.new("fakedish2","5", "main", 0)
 
             testmenu.add_dish("fakedish", "7.50", "starter")
             testmenu.add_dish("fakedish2","5", "main")
@@ -50,4 +50,15 @@ RSpec.describe Menu do
             expect(testmenu.dish("fakedish")).to eq fakedish
         end
     end
+    describe "#dish_customer_quantity" do
+        it "returns default quantity 0" do
+            testmenu = Menu.new
+            testmenu.add_dish("fakedish", "7.50", "starter")
+            testmenu.add_dish("fakedish2","5", "main")
+
+            result = testmenu.dish_customer_quantity("fakedish")
+            expect(result).to eq 0
+        end
+    end
+
 end
