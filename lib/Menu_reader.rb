@@ -54,7 +54,7 @@ class MenuReader
         self.print_footer
     end
 end
-
+# hotelNick = MenuReader.new(hotelNicholas)
 # hotelNicholas = Menu.new
 # hotelNicholas.add_dish("Onion Soup", "6.50", "starter")
 # hotelNicholas.add_dish("Carrot Soup", "6.50", "starter")

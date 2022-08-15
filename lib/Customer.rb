@@ -1,24 +1,24 @@
 require_relative "./Menu.rb"
 require_relative "./Menu_reader.rb"
+require_relative "./Receipt.rb"
 
 Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
   attr_accessor :basket, :menu, :baskethash
-  def initialize(menureader, io=Kernel)
+  def initialize(menureader, receipt, io=Kernel)
     @basket = []
     @baskethash = {}
     @menureader = menureader
     @menu = @menureader.menu
     @io = io
     @input_choice = ""
+    @receipt = receipt
   end
 
   def run
     self.welcome_customer_details
     @menureader.print_menu
-    unless @input_choice == "print receipt"
-      self.customer_terminal_choice
-    end
-    
+    self.customer_terminal_choice
+    @receipt.print_receipt(@basket)
   end
   
   def add_item_to_basket
@@ -30,19 +30,6 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
     @basket << @menu.dish(dish)
     
   end
-  
-  # def add_item_to_baskethash
-  #   @io.puts "Please type the name of the dish you wish to add exactly as found in the menu:"
-  #   dish = @io.gets.chomp
-  #   @io.puts "How many of this dish would you like? Please type a number"
-  #   quantity = @io.gets.chomp.to_i
-
-  
-
-  #   @baskethash[@menu.dish(dish)]
-  #   store(@menu.dish(dish),quantity)
-  #   p @baskethash
-  # end
 
   private
 
@@ -56,18 +43,22 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
   end
 
   def customer_terminal_choice
-    @io.puts "Please type 'menu' to view the menu again, or 'add dish' to start adding dishes to your basket."
-    @input_choice = @io.gets.chomp
-    if @input_choice == 'menu'
-      @menureader.print_menu
-    elsif @input_choice == 'add dish'
-      self.add_item_to_basket
-    elsif @input_choice == 'quit'
-      self.quit
+    while @input_choice != "print receipt"
+      @io.puts "Please type 'menu' to view the menu again, or 'add dish' to start adding dishes to your basket. \nWhen finished, type 'print receipt'."
+      @input_choice = @io.gets.chomp
+      break if @input_choice == "print receipt"
+      if @input_choice == 'menu'
+        @menureader.print_menu
+      elsif @input_choice == 'add dish'
+        self.add_item_to_basket
+      elsif @input_choice == 'quit'
+        self.quit
+      end
     end
   end  
 
 end
+
 
 # hotelNicholas = Menu.new
 # hotelNicholas.add_dish("Onion Soup", "6.50", "starter")
@@ -82,5 +73,6 @@ end
 # hotelNicholas.add_dish("Honey, Whisky and Almond Sponge", "8.00", "dessert")
 # hotelNicholas.add_dish("Chocolate Arctic Roll", "7.00", "dessert")
 # hotelNick = MenuReader.new(hotelNicholas)
-# nick = Customer.new(hotelNick)
+# receipt_ = Receipt.new
+# nick = Customer.new(hotelNick, receipt_)
 # nick.run
