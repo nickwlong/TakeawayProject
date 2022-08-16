@@ -10,7 +10,7 @@ class Menu
   end
 
   def dish(choice)
-    chosen_dish = @menu.select{|dish| dish.name == choice}
+    chosen_dish = @menu.select{|dish| dish.name.downcase == choice.downcase}
     return chosen_dish[0]
   end
 

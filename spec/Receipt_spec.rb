@@ -19,7 +19,7 @@ RSpec.describe Receipt do
             dish2 = double(:dish2, name: "Carrot Soup", price: "7.50", customer_quantity: 4)
             custdouble = double(:menu1, basket: [dish1, dish2])
             result = receipt.receipt_total(custdouble.basket)
-            expect(result).to eq "Total cost: £43.00"
+            expect(result).to eq "------------------------\nTotal cost: £43.00\n"
         end
         it "returns a string including the total cost of 3 basket items" do
             receipt = Receipt.new
@@ -28,14 +28,14 @@ RSpec.describe Receipt do
             dish3 = double(:dish3, name: "Pepper Soup", price: "4.33", customer_quantity: 1)
             custdouble = double(:menu1, basket: [dish1, dish2, dish3])
             result = receipt.receipt_total(custdouble.basket)
-            expect(result).to eq "Total cost: £47.33"
+            expect(result).to eq "------------------------\nTotal cost: £47.33\n"
         end
         it "returns a string including the total cost of 1 basket item w/ no pennies" do
             receipt = Receipt.new
             dish1 = double(:dish1, name: "Onion Soup", price: "6.0", customer_quantity: 1)
             custdouble = double(:menu1, basket: [dish1])
             result = receipt.receipt_total(custdouble.basket)
-            expect(result).to eq "Total cost: £6.00"
+            expect(result).to eq "------------------------\nTotal cost: £6.00\n"
         end
     end
 
