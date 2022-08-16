@@ -44,13 +44,9 @@ class MenuReader
 
     def print_menu
         self.print_header
-
         self.print_starters
-
         self.print_mains
-
         self.print_desserts
-
         self.print_footer
     end
 end

@@ -12,7 +12,7 @@ class Receipt
 
         @io.puts self.receipt_dishes_from_basket(basket)
 
-        self.receipt_total
+        @io.puts self.receipt_total
 
         self.receipt_footer
     end
@@ -24,16 +24,16 @@ class Receipt
     end
 
     def receipt_dishes_from_basket(basket)
-        #Basket is an array of objects of dishes. Want to return a count of how many of each dish there are
-        #"Count of the dishes" x "Name of dish" @ "price of dish"
-        #"2x Onion Soup @ 6.50"
         receipt_dish_list = basket.map do |dish|
-            "#{dish.customer_quantity}x #{dish.name} @ #{dish.price}"
+            "#{dish.customer_quantity}x #{dish.name} @ £#{dish.price}"
         end
         return receipt_dish_list.join("\n")
     end
 
-    def receipt_total
+    def receipt_total(basket)
+        total_cost = 0.0
+        basket.each{|dish| total_cost += (dish.price.to_f * dish.customer_quantity)}
+        return "Total cost: £#{sprintf("%.2f" % total_cost.round(2))}"
     end
 
     def receipt_footer

@@ -4,9 +4,8 @@ require_relative "./Receipt.rb"
 
 Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
   attr_accessor :basket, :menu, :baskethash
-  def initialize(menureader, receipt, io=Kernel)
+  def initialize(menureader, receipt=Receipt.new, io=Kernel)
     @basket = []
-    @baskethash = {}
     @menureader = menureader
     @menu = @menureader.menu
     @io = io
@@ -16,9 +15,7 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
 
   def run
     self.welcome_customer_details
-    @menureader.print_menu
     self.customer_terminal_choice
-    @receipt.print_receipt(@basket)
   end
   
   def add_item_to_basket
@@ -28,10 +25,7 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
     quantity = @io.gets.chomp.to_i
     @menu.dish(dish).customer_quantity += quantity
     @basket << @menu.dish(dish)
-    
   end
-
-  private
 
   def welcome_customer_details
     @io.puts "Welcome to the takeaway service for Hotel Nicholas, please enter your name:"
@@ -40,23 +34,34 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
     @contactaddress = @io.gets.chomp
     @io.puts "\nPlease enter your contact number:"
     @contactphonenumber = @io.gets.chomp
+    @menureader.print_menu
   end
 
   def customer_terminal_choice
-    while @input_choice != "print receipt"
-      @io.puts "Please type 'menu' to view the menu again, or 'add dish' to start adding dishes to your basket. \nWhen finished, type 'print receipt'."
-      @input_choice = @io.gets.chomp
-      break if @input_choice == "print receipt"
-      if @input_choice == 'menu'
+    @io.puts "Please type 'menu' to view the menu, 'add dish' to start adding dishes to your basket. \nWhen finished adding dishes, type 'print receipt'. \nIf happy with your receipt, type 'submit order'\nType 'quit' to exit."
+    @input_choice = @io.gets.chomp
+    while @input_choice != "submit order"
+      if @input_choice == "print receipt"
+        self.receipt_printout
+      elsif @input_choice == 'menu'
         @menureader.print_menu
       elsif @input_choice == 'add dish'
         self.add_item_to_basket
       elsif @input_choice == 'quit'
         self.quit
+      else
+        self.customer_terminal_choice
       end
     end
-  end  
-
+  end
+  
+  def receipt_printout
+    if !@basket.empty? 
+      @receipt.print_receipt(@basket)
+    else
+      @io.puts "ERROR: You must add dishes to your basket before requesting a receipt!"
+    end
+  end
 end
 
 

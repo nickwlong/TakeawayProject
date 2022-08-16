@@ -27,12 +27,46 @@ I would like to receive a text such as "Thank you! Your order was placed and wil
 
 
 2. Design the Class System
-Dish
-Menu << Dish(name, price, category)
-CustomerDetails (name, address, number)
-Customer << CustomerDetails, add items from Menu
-Receipt << CustomerDetails/Customer
-Messaging? << Customer control
+
+   ┌────────────────────────────┐    ┌───────────────────────────────┐
+   │MenuReader                  │    │                               │
+   │                            │    │ CUSTOMER                      │
+   │ Takes dishes from menu     │    │                               │
+   │                            │    │ run (creates terminal entry   │    ┌────────────────────┐
+   │ Creates printout of menu   │    │   (also prints receipt) point)│    │Twilio              │
+   │     Header                 │    │ add_item_to_basket            │    │                    │
+   │     Print starters etc.   ─┼────►                               ├────►                    │
+   │     Footer                 │    │ store customer details        │    │                    │
+   │ (print_menu)               │    │                               │    │                    │
+   │                            │    │ provide customer term choice  │    │                    │
+   │                            │    │                               │    └────────────────────┘
+   │                            │    │ output details to twilio      │
+   │                            │    │                               │
+   │                            │    │                               │
+   └─────────────▲──────────────┘    └─────────────▲─────────────────┘
+                 │                                 │
+   ┌─────────────┴──────────────┐      ┌───────────┴────────────────┐
+   │Menu                        │      │  Receipt                   │
+   │                            │      │                            │
+   │ Stores Dish objects in     │      │  Prints receipt of:        │
+   │     an array of dishes     │      │     Header                 │
+   │      (@menu)               │      │     List of dishes         │
+   │                            │      │        and quantities      │
+   │ Add_dish                   │      │        and individual price│
+   │                            │      │                            │
+   │ dish_customer_quantity     │      │     Total price            │
+   │                            │      │     Footer                 │
+   │ Return dishes of a category│      │                            │
+   │                            │      │                            │
+   │ Return dish/price string   │      │                            │
+   └┬──────────────────────────┬┘      └────────────────────────────┘
+    ├──────────────────────────┤
+    │ Dish                     │
+    │  name                    │
+    │  price                   │
+    │  category  (starter etc.)│
+    │  customer_quantity = 0   │
+    └──────────────────────────┘
 
 Also design the interface of each class in more detail.
 ```ruby
