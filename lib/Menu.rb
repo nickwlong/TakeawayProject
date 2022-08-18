@@ -14,6 +14,10 @@ class Menu
     return chosen_dish[0]
   end
 
+  def dish_exist?(choice)
+    return @menu.any? {|dish| dish.name == dish}
+  end
+  
   def dish_customer_quantity(dish)
     self.dish(dish).customer_quantity
   end

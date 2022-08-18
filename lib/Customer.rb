@@ -13,6 +13,7 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
     @io = io
     @input_choice = ""
     @receipt = receipt
+    @twilio = TwilioMessage.new
   end
 
   def run
@@ -25,6 +26,7 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
     dish = @io.gets.chomp
     @io.puts "\n**  How many of this dish would you like? Please type a number  **"
     quantity = @io.gets.chomp.to_i
+    if 
     @menu.dish(dish).customer_quantity += quantity
     @basket << @menu.dish(dish)
   end
@@ -58,6 +60,7 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
         self.customer_terminal_choice
       end
     end
+    @twilio.send_message
   end
   
   def receipt_printout
@@ -70,19 +73,21 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
 
 end
 
-# hotelNicholas = Menu.new
-# hotelNicholas.add_dish("Onion Soup", "6.50", "starter")
-# hotelNicholas.add_dish("Carrot Soup", "6.50", "starter")
-# hotelNicholas.add_dish("Brixham Crab", "11.50", "starter")
-# hotelNicholas.add_dish("Hand Dived Devon Scallop", "10.25", "starter")
-# hotelNicholas.add_dish("Rump of New Season Lamb", "16.50", "main")
-# hotelNicholas.add_dish("Devon Blue Croquettes", "14.00", "main")
-# hotelNicholas.add_dish("Dry Aged Beef Fillet", "27.50", "main")
-# hotelNicholas.add_dish("Roasted Monkfish", "16.50", "main")
-# hotelNicholas.add_dish("Apricot Sorbet", "6.00", "dessert")
-# hotelNicholas.add_dish("Honey, Whisky and Almond Sponge", "8.00", "dessert")
-# hotelNicholas.add_dish("Chocolate Arctic Roll", "7.00", "dessert")
-# hotelNick = MenuReader.new(hotelNicholas)
-# receipttest = Receipt.new
-# nick = Customer.new(hotelNick, receipttest)
-# nick.run
+hotelNicholas = Menu.new
+hotelNicholas.add_dish("Onion Soup", "6.50", "starter")
+hotelNicholas.add_dish("Carrot Soup", "6.50", "starter")
+hotelNicholas.add_dish("Brixham Crab", "11.50", "starter")
+hotelNicholas.add_dish("Hand Dived Devon Scallop", "10.25", "starter")
+hotelNicholas.add_dish("Rump of New Season Lamb", "16.50", "main")
+hotelNicholas.add_dish("Devon Blue Croquettes", "14.00", "main")
+hotelNicholas.add_dish("Dry Aged Beef Fillet", "27.50", "main")
+hotelNicholas.add_dish("Roasted Monkfish", "16.50", "main")
+hotelNicholas.add_dish("Apricot Sorbet", "6.00", "dessert")
+hotelNicholas.add_dish("Honey, Whisky and Almond Sponge", "8.00", "dessert")
+hotelNicholas.add_dish("Chocolate Arctic Roll", "7.00", "dessert")
+hotelNick = MenuReader.new(hotelNicholas)
+receipttest = Receipt.new
+nick = Customer.new(hotelNick, receipttest)
+ted = Customer.new(hotelNick, receipttest)
+
+nick.run
