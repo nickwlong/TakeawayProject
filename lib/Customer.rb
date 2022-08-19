@@ -1,6 +1,7 @@
 require_relative "./Menu.rb"
 require_relative "./Menu_reader.rb"
 require_relative "./Receipt.rb"
+require_relative "./twilio_message.rb"
 
 
 
@@ -16,8 +17,9 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
   end
 
   def run
-    self.welcome_customer_details
-    self.customer_terminal_choice
+    welcome_customer_details
+    customer_terminal_choice
+    customer_message
   end
   
   def add_item_to_basket
@@ -58,6 +60,10 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
         self.customer_terminal_choice
       end
     end
+<<<<<<< HEAD
+=======
+    
+>>>>>>> parent of bcbeefa (changes to live use cases)
   end
   
   def receipt_printout
@@ -68,6 +74,12 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
     end
   end
 
+  def customer_message
+    time = (Time.now + 7200).strftime("%H:%M")
+    name = self.contactname
+    total_cost = @receipt.total_cost(@basket)
+    @twilio.send_message("Dear #{name}, thank you for your order totalling £#{total_cost} from Hotel Nicholas. It should be with you by #{time}")
+  end
 end
 
 # hotelNicholas = Menu.new
@@ -85,4 +97,9 @@ end
 # hotelNick = MenuReader.new(hotelNicholas)
 # receipttest = Receipt.new
 # nick = Customer.new(hotelNick, receipttest)
+<<<<<<< HEAD
+=======
+# ted = Customer.new(hotelNick, receipttest)
+
+>>>>>>> parent of bcbeefa (changes to live use cases)
 # nick.run

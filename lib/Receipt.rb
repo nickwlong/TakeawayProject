@@ -24,10 +24,15 @@ class Receipt
         return receipt_dish_list.join("\n")
     end
 
-    def receipt_total(basket)
+    def total_cost(basket)
         total_cost = 0.0
         basket.each{|dish| total_cost += (dish.price.to_f * dish.customer_quantity)}
-        return "------------------------\nTotal cost: £#{sprintf("%.2f" % total_cost.round(2))}\n"
+        return total_cost
+    end
+    
+    def receipt_total(basket)
+        
+        return "------------------------\nTotal cost: £#{sprintf("%.2f" % total_cost(basket).round(2))}\n"
     end
 
     def receipt_footer
