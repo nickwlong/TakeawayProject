@@ -14,7 +14,6 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
     @io = io
     @input_choice = ""
     @receipt = receipt
-    @twilio = TwilioMessage.new
   end
 
   def run
@@ -61,7 +60,6 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
         self.customer_terminal_choice
       end
     end
-    
   end
   
   def receipt_printout
@@ -95,6 +93,5 @@ end
 # hotelNick = MenuReader.new(hotelNicholas)
 # receipttest = Receipt.new
 # nick = Customer.new(hotelNick, receipttest)
-
 
 # nick.run
