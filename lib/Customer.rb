@@ -60,6 +60,10 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
         self.customer_terminal_choice
       end
     end
+<<<<<<< HEAD
+=======
+    
+>>>>>>> parent of bcbeefa (changes to live use cases)
   end
   
   def receipt_printout
@@ -93,5 +97,9 @@ end
 # hotelNick = MenuReader.new(hotelNicholas)
 # receipttest = Receipt.new
 # nick = Customer.new(hotelNick, receipttest)
+<<<<<<< HEAD
+=======
+# ted = Customer.new(hotelNick, receipttest)
+>>>>>>> parent of bcbeefa (changes to live use cases)
 
 # nick.run
