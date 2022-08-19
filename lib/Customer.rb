@@ -1,7 +1,6 @@
 require_relative "./Menu.rb"
 require_relative "./Menu_reader.rb"
 require_relative "./Receipt.rb"
-require_relative "./twilio_message.rb"
 
 
 
@@ -17,9 +16,8 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
   end
 
   def run
-    welcome_customer_details
-    customer_terminal_choice
-    customer_message
+    self.welcome_customer_details
+    self.customer_terminal_choice
   end
   
   def add_item_to_basket
@@ -27,6 +25,7 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
     dish = @io.gets.chomp
     @io.puts "\n**  How many of this dish would you like? Please type a number  **"
     quantity = @io.gets.chomp.to_i
+    if 
     @menu.dish(dish).customer_quantity += quantity
     @basket << @menu.dish(dish)
   end
@@ -61,9 +60,13 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
       end
     end
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     
 >>>>>>> parent of bcbeefa (changes to live use cases)
+=======
+    @twilio.send_message
+>>>>>>> parent of d991e1b (twilio functioning)
   end
   
   def receipt_printout
@@ -74,14 +77,9 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
     end
   end
 
-  def customer_message
-    time = (Time.now + 7200).strftime("%H:%M")
-    name = self.contactname
-    total_cost = @receipt.total_cost(@basket)
-    @twilio.send_message("Dear #{name}, thank you for your order totalling £#{total_cost} from Hotel Nicholas. It should be with you by #{time}")
-  end
 end
 
+<<<<<<< HEAD
 # hotelNicholas = Menu.new
 # hotelNicholas.add_dish("Onion Soup", "6.50", "starter")
 # hotelNicholas.add_dish("Carrot Soup", "6.50", "starter")
@@ -101,5 +99,23 @@ end
 =======
 # ted = Customer.new(hotelNick, receipttest)
 >>>>>>> parent of bcbeefa (changes to live use cases)
+=======
+hotelNicholas = Menu.new
+hotelNicholas.add_dish("Onion Soup", "6.50", "starter")
+hotelNicholas.add_dish("Carrot Soup", "6.50", "starter")
+hotelNicholas.add_dish("Brixham Crab", "11.50", "starter")
+hotelNicholas.add_dish("Hand Dived Devon Scallop", "10.25", "starter")
+hotelNicholas.add_dish("Rump of New Season Lamb", "16.50", "main")
+hotelNicholas.add_dish("Devon Blue Croquettes", "14.00", "main")
+hotelNicholas.add_dish("Dry Aged Beef Fillet", "27.50", "main")
+hotelNicholas.add_dish("Roasted Monkfish", "16.50", "main")
+hotelNicholas.add_dish("Apricot Sorbet", "6.00", "dessert")
+hotelNicholas.add_dish("Honey, Whisky and Almond Sponge", "8.00", "dessert")
+hotelNicholas.add_dish("Chocolate Arctic Roll", "7.00", "dessert")
+hotelNick = MenuReader.new(hotelNicholas)
+receipttest = Receipt.new
+nick = Customer.new(hotelNick, receipttest)
+ted = Customer.new(hotelNick, receipttest)
+>>>>>>> parent of d991e1b (twilio functioning)
 
-# nick.run
+nick.run
