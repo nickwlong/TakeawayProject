@@ -95,6 +95,6 @@ end
 # hotelNick = MenuReader.new(hotelNicholas)
 # receipttest = Receipt.new
 # nick = Customer.new(hotelNick, receipttest)
-# ted = Customer.new(hotelNick, receipttest)
+
 
 # nick.run
