@@ -61,9 +61,13 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
     end
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     
 >>>>>>> parent of bcbeefa (changes to live use cases)
+=======
+    @twilio.send_message
+>>>>>>> parent of d991e1b (twilio functioning)
 =======
     @twilio.send_message
 >>>>>>> parent of d991e1b (twilio functioning)
@@ -79,6 +83,7 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
 
 end
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # hotelNicholas = Menu.new
 # hotelNicholas.add_dish("Onion Soup", "6.50", "starter")
@@ -100,6 +105,8 @@ end
 # ted = Customer.new(hotelNick, receipttest)
 >>>>>>> parent of bcbeefa (changes to live use cases)
 =======
+=======
+>>>>>>> parent of d991e1b (twilio functioning)
 hotelNicholas = Menu.new
 hotelNicholas.add_dish("Onion Soup", "6.50", "starter")
 hotelNicholas.add_dish("Carrot Soup", "6.50", "starter")
@@ -116,6 +123,9 @@ hotelNick = MenuReader.new(hotelNicholas)
 receipttest = Receipt.new
 nick = Customer.new(hotelNick, receipttest)
 ted = Customer.new(hotelNick, receipttest)
+<<<<<<< HEAD
+>>>>>>> parent of d991e1b (twilio functioning)
+=======
 >>>>>>> parent of d991e1b (twilio functioning)
 
 nick.run
