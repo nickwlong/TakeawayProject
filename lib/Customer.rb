@@ -26,7 +26,6 @@ Customer = Struct.new(:contactname, :contactaddress, :contactphonenumber) do
     dish = @io.gets.chomp
     @io.puts "\n**  How many of this dish would you like? Please type a number  **"
     quantity = @io.gets.chomp.to_i
-    if 
     @menu.dish(dish).customer_quantity += quantity
     @basket << @menu.dish(dish)
   end
